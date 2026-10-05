@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Navoiycha Choyxona</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6f5;--card:#fff;--ink:#12263f;--mut:#5b6b7c;--tq:#14797b;--sf:#e9a92b;--line:#d5e0df;--ontq:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a2b;--card:#15263c;--ink:#eaf1f0;--mut:#9fb0bf;--tq:#3fc1c0;--line:#243a54;--ontq:#0d1a2b}}
+:root[data-theme="dark"]{--bg:#0d1a2b;--card:#15263c;--ink:#eaf1f0;--mut:#9fb0bf;--tq:#3fc1c0;--line:#243a54;--ontq:#0d1a2b}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Onest,system-ui,sans-serif}
+h1,h2,h3{font-family:Unbounded,system-ui,sans-serif;line-height:1.15;margin:0}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sf);outline-offset:2px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font:700 18px Unbounded,sans-serif;text-decoration:none;margin-right:auto}
+nav a{margin:0 8px;text-decoration:none;color:var(--mut);font-weight:500}
+nav a:hover{color:var(--ink)}
+.cartbtn{background:var(--tq);color:var(--ontq);border:0;border-radius:99px;padding:8px 16px;font-weight:600}
+.cartbtn b{background:var(--sf);color:#12263f;border-radius:99px;padding:0 8px;margin-left:6px}
+.hero{padding:56px 0 48px;background:
+ conic-gradient(from 45deg at 50% 50%,var(--tq) 0 25%,transparent 0 50%,var(--tq) 0 75%,transparent 0) 0 0/36px 36px;
+ background-color:var(--ink);color:#fff;position:relative}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#12263f 35%,rgba(18,38,63,.55))}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(34px,7vw,64px);max-width:11em;letter-spacing:-.02em}
+.hero p{max-width:34em;color:#d3dfe3;font-size:18px;margin:18px 0 26px}
+.btn{display:inline-block;background:var(--sf);color:#12263f;text-decoration:none;border:0;border-radius:10px;padding:13px 22px;font-weight:600}
+.status{display:inline-block;margin-left:14px;color:#d3dfe3;font-size:15px}
+section{padding:56px 0}
+h2{font-size:clamp(24px,4vw,34px);margin-bottom:22px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:7px 16px}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.dish{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.dish .em{font-size:38px;line-height:1}
+.dish h3{font-size:16px}
+.dish p{margin:0;color:var(--mut);font-size:14px;flex:1}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.price{font-weight:600}
+.add{background:var(--tq);color:var(--ontq);border:0;border-radius:8px;padding:7px 14px;font-weight:600}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.about p{color:var(--mut);max-width:34em}
+.facts{display:grid;gap:12px}
+.facts div{background:var(--card);border-left:5px solid var(--sf);border-radius:8px;padding:14px 18px}
+.facts b{display:block;font-family:Unbounded,sans-serif;font-size:15px}
+form{display:grid;gap:12px;max-width:460px}
+label{font-weight:500;font-size:14px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:14px}
+#shade{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:8}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--bg);z-index:9;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) 20px calc(18px + env(safe-area-inset-bottom,0px));overflow-y:auto}
+body.open #shade{opacity:1;pointer-events:auto}
+body.open #drawer{transform:none}
+.item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.item span:first-child{flex:1}
+.q{display:flex;align-items:center;gap:8px}
+.q button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.total{display:flex;justify-content:space-between;font-weight:600;font-size:18px;margin:16px 0}
+.close{align-self:flex-end;background:none;border:0;font-size:26px;color:var(--ink)}
+.ok{background:var(--tq);color:var(--ontq);border-radius:12px;padding:16px;margin-top:12px}
+.empty{color:var(--mut);padding:24px 0}
+@media(max-width:700px){nav{display:none}.about{grid-template-columns:1fr}.status{display:block;margin:12px 0 0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#top">Chinor</a>
+<nav><a href="#menyu">Menyu</a><a href="#haqida">Biz haqimizda</a><a href="#aloqa">Aloqa</a></nav>
+<button class="cartbtn" id="openCart" aria-label="Savatni ochish">Savat<b id="count">0</b></button>
+</div></header>
+ 
+<main id="top">
+<div class="hero"><div class="wrap">
+<h1>Chinor soyasida issiq choy va osh</h1>
+<p>An'anaviy o'zbek taomlari va yangi damlangan choy. Menyudan tanlang, savatga soling va buyurtma bering.</p>
+<a class="btn" href="#menyu">Menyuni ko'rish</a><span class="status" id="status"></span>
+</div></div>
+ 
+<section id="menyu"><div class="wrap">
+<h2>Menyu</h2>
+<div class="tabs" id="tabs" role="group" aria-label="Kategoriyalar"></div>
+<div class="grid" id="grid"></div>
+</div></section>
+ 
+<section id="haqida" style="background:var(--card)"><div class="wrap about">
+<div><h2>Biz haqimizda</h2>
+<p>Chinor choyxonasi oilaviy ish: oshni qozonda, somsani tandirda, choyni choynakda tayyorlaymiz. Mahsulotlarni har kuni ertalab bozordan olamiz.</p></div>
+<div class="facts">
+<div><b>Har kuni 09:00 – 23:00</b>Hafta davomida ochiqmiz</div>
+<div><b>Tandirda pishgan</b>Somsa va non har soatda yangi</div>
+<div><b>Yetkazib berish</b>Shahar bo'ylab 45 daqiqada</div>
+</div></div></section>
+ 
+<section id="aloqa"><div class="wrap">
+<h2>Buyurtma berish</h2>
+<p style="color:var(--mut);margin-top:-8px">Savatga taom qo'shing, so'ng ismingiz va telefoningizni qoldiring.</p>
+<form id="form">
+<div><label for="name">Ismingiz</label><input id="name" required autocomplete="name"></div>
+<div><label for="tel">Telefon raqam</label><input id="tel" type="tel" required inputmode="tel" placeholder="+998 90 123 45 67" autocomplete="tel"></div>
+<div><label for="note">Izoh</label><textarea id="note" rows="3" placeholder="Manzil yoki istaklaringiz"></textarea></div>
+<button class="btn" type="submit">Buyurtma yuborish</button>
+<div id="msg" role="status"></div>
+</form>
+</div></section>
+</main>
+ 
+<footer><div class="wrap">© 2026 Chinor choyxonasi. Barcha huquqlar himoyalangan.</div></footer>
+ 
+<div id="shade"></div>
+<aside id="drawer" aria-label="Savat">
+<button class="close" id="closeCart" aria-label="Yopish">×</button>
+<h2 style="font-size:22px">Savat</h2>
+<div id="items"></div>
+<div class="total"><span>Jami</span><span id="sum">0 so'm</span></div>
+<a class="btn" href="#aloqa" id="checkout" style="text-align:center">Buyurtmaga o'tish</a>
+</aside>
+ 
+<script>
+var DISHES=[
+{id:1,n:"Samarqand oshi",d:"Qo'y go'shti, sarimsoq va zirvak bilan",p:42000,c:"Asosiy",e:"🍚"},
+{id:2,n:"Lag'mon",d:"Qo'lda cho'zilgan xamir, sabzavotli sho'rva",p:36000,c:"Asosiy",e:"🍜"},
+{id:3,n:"Manti",d:"Qovoqli va go'shtli, bug'da pishirilgan",p:38000,c:"Asosiy",e:"🥟"},
+{id:4,n:"Shashlik",d:"Ko'mirda pishgan qo'y go'shti, piyoz bilan",p:30000,c:"Asosiy",e:"🍢"},
+{id:5,n:"Mastava",d:"Guruchli quyuq sho'rva, qatiq bilan",p:28000,c:"Sho'rvalar",e:"🍲"},
+{id:6,n:"Shurpa",d:"Katta bo'lak go'sht va kartoshkali",p:34000,c:"Sho'rvalar",e:"🥘"},
+{id:7,n:"Tandir somsa",d:"Tandirda pishgan, go'shtli",p:14000,c:"Non va somsa",e:"🥐"},
+{id:8,n:"Patir non",d:"Yumshoq, issiq, kunjutli",p:9000,c:"Non va somsa",e:"🍞"},
+{id:9,n:"Ko'k choy",d:"Choynakda damlangan, 500 ml",p:12000,c:"Ichimliklar",e:"🍵"},
+{id:10,n:"Qora choy limonli",d:"Yangi limon bilan, 500 ml",p:12000,c:"Ichimliklar",e:"🫖"},
+{id:11,n:"Chak-chak",d:"Asal bilan, qo'lda tayyorlangan",p:18000,c:"Shirinliklar",e:"🍯"},
+{id:12,n:"Holva",d:"Yong'oq va sutli",p:16000,c:"Shirinliklar",e:"🍬"},
+{id:13,n:"Beshbarmoq (norin)",d:"Qo'lda kesilgan xamir, qazi va ot go'shti bilan",p:48000,c:"Asosiy",e:"🥩"},
+{id:14,n:"Dimlama",d:"Go'sht va sabzavotlar o'z shirasida dimlangan",p:40000,c:"Asosiy",e:"🥔"},
+{id:15,n:"Qozon kabob",d:"Qozonda qovurilgan go'sht va kartoshka",p:44000,c:"Asosiy",e:"🍖"},
+{id:16,n:"Do'lma",d:"Uzum bargiga o'ralgan go'shtli guruch",p:32000,c:"Asosiy",e:"🥬"},
+{id:17,n:"Shivit oshi",d:"Ko'k xamirli lag'mon, achchiq qatiq va go'sht bilan",p:38000,c:"Asosiy",e:"🌿"},
+{id:18,n:"Chuchvara",d:"Mayda pelmen, sho'rvada yoki qatiq bilan",p:30000,c:"Sho'rvalar",e:"🥣"},
+{id:19,n:"Moshxo'rda",d:"Mosh, guruch va sabzavotli yengil sho'rva",p:26000,c:"Sho'rvalar",e:"🫘"},
+{id:20,n:"Lochira",d:"Yog'li, qatlamli o'zbek noni",p:11000,c:"Non va somsa",e:"🫓"},
+{id:21,n:"Qovoqli somsa",d:"Qovoq va piyozli, tandirda pishgan",p:12000,c:"Non va somsa",e:"🎃"},
+{id:22,n:"Chalop",d:"Sovuq qatiq, bodring va ko'katli ichimlik",p:10000,c:"Ichimliklar",e:"🥛"},
+{id:23,n:"Qaymoqli choy",d:"Sut va qaymoq bilan damlangan",p:14000,c:"Ichimliklar",e:"☕"},
+{id:24,n:"Paxlava",d:"Yong'oqli, asalli, qatlamli",p:20000,c:"Shirinliklar",e:"🍰"},
+{id:25,n:"Parvarda",d:"Qand va yong'oq bilan tayyorlangan an'anaviy shirinlik",p:15000,c:"Shirinliklar",e:"🍭"}];
+var CATS=["Hammasi"].concat(DISHES.map(function(x){return x.c}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var cat="Hammasi",cart={};
+try{var s=localStorage.getItem("chinor-cart");if(s)cart=JSON.parse(s)||{}}catch(e){}
+function $(i){return document.getElementById(i)}
+function fmt(n){return n.toLocaleString("ru-RU")+" so'm"}
+function save(){try{localStorage.setItem("chinor-cart",JSON.stringify(cart))}catch(e){}}
+function tabs(){$("tabs").innerHTML="";CATS.forEach(function(c){var b=document.createElement("button");b.className="tab";b.textContent=c;b.setAttribute("aria-pressed",c===cat);b.onclick=function(){cat=c;tabs();grid()};$("tabs").appendChild(b)})}
+function grid(){var h="";DISHES.filter(function(x){return cat==="Hammasi"||x.c===cat}).forEach(function(x){
+h+='<div class="dish"><div class="em" aria-hidden="true">'+x.e+'</div><h3>'+x.n+'</h3><p>'+x.d+'</p><div class="row"><span class="price">'+fmt(x.p)+'</span><button class="add" data-id="'+x.id+'">Qo\'shish</button></div></div>'});
+$("grid").innerHTML=h}
+function render(){var h="",sum=0,cnt=0;
+DISHES.forEach(function(x){var q=cart[x.id];if(!q)return;sum+=q*x.p;cnt+=q;
+h+='<div class="item"><span>'+x.n+'<br><small>'+fmt(x.p)+'</small></span><span class="q"><button data-m="'+x.id+'" aria-label="Kamaytirish">−</button><b>'+q+'</b><button data-p="'+x.id+'" aria-label="Ko\'paytirish">+</button></span></div>'});
+$("items").innerHTML=h||'<div class="empty">Savat bo\'sh. Menyudan taom tanlang.</div>';
+$("sum").textContent=fmt(sum);$("count").textContent=cnt;save()}
+function open(v){document.body.classList.toggle("open",v)}
+document.addEventListener("click",function(e){var t=e.target;
+if(t.dataset.id){cart[t.dataset.id]=(cart[t.dataset.id]||0)+1;render();t.textContent="Qo'shildi ✓";setTimeout(function(){t.textContent="Qo'shish"},900)}
+if(t.dataset.p){cart[t.dataset.p]++;render()}
+if(t.dataset.m){if(--cart[t.dataset.m]<=0)delete cart[t.dataset.m];render()}});
+$("openCart").onclick=function(){open(true)};
+$("closeCart").onclick=$("shade").onclick=$("checkout").onclick=function(){open(false)};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")open(false)});
+$("form").onsubmit=function(e){e.preventDefault();
+var sum=0;DISHES.forEach(function(x){sum+=(cart[x.id]||0)*x.p});
+var m=$("msg");
+if(!sum){m.className="ok";m.textContent="Savat bo'sh. Avval menyudan taom qo'shing.";return}
+m.className="ok";m.textContent=$("name").value+", buyurtmangiz qabul qilindi! Jami: "+fmt(sum)+". Tez orada "+$("tel").value+" raqamiga qo'ng'iroq qilamiz.";
+cart={};render();e.target.reset()};
+function status(){var h=new Date().getHours(),o=h>=9&&h<23;$("status").textContent=o?"Hozir ochiq, 23:00 gacha":"Hozir yopiq, 09:00 da ochamiz"}
+tabs();grid();render();status();
+</script>
+</body>
+</html>
+ 
